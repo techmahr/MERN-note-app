@@ -1,12 +1,12 @@
-import os from "os";
-import fs from "fs";
+// import os from "os";
+// import fs from "fs";
 
-console.log("mahr")
+// console.log("mahr")
 
-// fs.writeFileSync("hello.txt", "Hello Node by Mahr");
+// // fs.writeFileSync("hello.txt", "Hello Node by Mahr");
 
-const data = fs.readFileSync("hello.txt", "utf8");
-console.log(data);
+// const data = fs.readFileSync("hello.txt", "utf8");
+// console.log(data);
 
 
 
