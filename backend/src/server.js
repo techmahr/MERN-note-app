@@ -11,6 +11,10 @@ const PORT = process.env.PORT || 5001;
 
 connectDB();
 
+// Midleware 
+
+app.use(express.json());
+
 app.use("/api/notes", noteRoutes); // creates and api route and defines  end point http://localhost:5001/api/notes
 
 // start the server 
