@@ -2,6 +2,7 @@ import express from "express";
 import noteRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "./config/db.js";
 import dotenv from "dotenv";
+import ratelimiter from "./middleware/rateLimiter.js";
 
 dotenv.config();
 
@@ -11,9 +12,11 @@ const PORT = process.env.PORT || 5001;
 
 connectDB();
 
-// Midleware 
+// Midleware to convert json to js. it parse json bodies: req.body
 
 app.use(express.json());
+
+app.use(ratelimiter) // middleware for limiting request to the application 
 
 app.use("/api/notes", noteRoutes); // creates and api route and defines  end point http://localhost:5001/api/notes
 
