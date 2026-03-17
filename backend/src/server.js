@@ -10,7 +10,7 @@ dotenv.config();
 const app = express(); // initalizes and experss application instance 
 const PORT = process.env.PORT || 5001;
 
-connectDB();
+
 
 // Midleware to convert json to js. it parse json bodies: req.body
 
@@ -20,8 +20,14 @@ app.use(ratelimiter) // middleware for limiting request to the application
 
 app.use("/api/notes", noteRoutes); // creates and api route and defines  end point http://localhost:5001/api/notes
 
-// start the server 
 
-app.listen(PORT, () => {
-    console.log("Server running on port: ", PORT);
-});
+
+connectDB().then(() => { // connection to the DB
+    // start the server 
+    app.listen(PORT, () => {
+        console.log("Server running on port: ", PORT);
+    });
+})
+
+
+
