@@ -3,8 +3,8 @@ import Navbar from '../components/Navbar'
 import RateLimitedUI from '../components/RateLimitedUI';
 import NoteCard from "../components/NoteCard";
 import { useEffect } from 'react';
-import axios from 'axios';
 import toast from 'react-hot-toast';
+import api from "../lib/axios";
 
 const HomePage = () => {
 
@@ -20,8 +20,9 @@ const HomePage = () => {
                 // const data = await res.json();
 
                 // here we use axios 
-                const res = await axios.get("http://localhost:5001/api/notes");  // this give full axios response object 
+                // const res = await axios.get("http://localhost:5001/api/notes");  // this is moved to axios in lib.  this give full axios response object 
                 //console.log(res.data)
+                const res = await api.get("/notes");
                 setNotes(res.data); // this stores actual note data 
                 setIsRateLimited(false); // if we are getting data, we are not rate limited 
 
@@ -50,7 +51,7 @@ const HomePage = () => {
                 {notes.length > 0 && !isRateLimited && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {notes.map((note) => (
-                            <NoteCard key={note._id} note={note} />
+                            <NoteCard key={note._id} note={note} setNotes={setNotes} />
                         )
                         )}
                     </div>
